@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>PinkPastel Shop • Alat Tulis & Jasa Daftar Pustaka</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Quicksand', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: #fff5f9;
+            color: #4a3b3f;
+            padding-bottom: 75px;
+            min-height: 100vh;
+            transition: background 0.2s;
+        }
+
+        /* ===== VARIABEL WARNA ===== */
+        :root {
+            --pink-bg: #ffe4ec;
+            --pink-soft: #ffd9e6;
+            --pink-medium: #ffb3c6;
+            --pink-strong: #ff8fab;
+            --pink-deep: #e07a9e;
+            --white: #ffffff;
+            --text-dark: #4a3b3f;
+            --text-soft: #7a6b6f;
+            --shadow: 0 4px 12px rgba(255, 143, 171, 0.2);
+            --radius: 20px;
+            --radius-sm: 14px;
+        }
+
+        /* ===== NAVIGASI BAWAH (MOBILE) ===== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 0 12px;
+            box-shadow: 0 -4px 16px rgba(255, 143, 171, 0.25);
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            font-size: 11px;
+            color: var(--text-soft);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 4px 10px;
+            border-radius: 30px;
+            transition: 0.2s;
+            position: relative;
+        }
+
+        .nav-item.active {
+            color: var(--pink-deep);
+            font-weight: 700;
+            background: var(--pink-bg);
+        }
+
+        .nav-item .icon {
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        .badge {
+            position: absolute;
+            top: -4px;
+            right: -2px;
+            background: var(--pink-strong);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 50px;
+            min-width: 18px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(224, 122, 158, 0.4);
+        }
+
+        /* ===== KONTAINER UTAMA ===== */
+        .app-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 16px 14px 20px;
+        }
+
+        /* ===== HEADER ===== */
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            padding: 4px 0;
+        }
+
+        .app-header h1 {
+            font-size: 22px;
+            color: var(--pink-deep);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .app-header h1 span {
+            font-size: 26px;
+        }
+
+        .header-actions button {
+            background: var(--white);
+            border: none;
+            font-size: 20px;
+            padding: 8px 12px;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            margin-left: 6px;
+            transition: 0.2s;
+        }
+
+        .header-actions button:hover {
+            background: var(--pink-bg);
+        }
+
+        /* ===== KARTU ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 18px 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 16px;
+            transition: 0.2s;
+            border: 1px solid #ffeef4;
+        }
+
+        .card-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--pink-deep);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ===== QUOTES ===== */
+        .quote-box {
+            background: linear-gradient(135deg, #fff0f5, #ffe4ec);
+            border-radius: var(--radius-sm);
+            padding: 18px 16px;
+            text-align: center;
+            font-style: italic;
+            color: var(--pink-deep);
+            font-size: 15px;
+            border-left: 6px solid var(--pink-strong);
+            margin-bottom: 18px;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .quote-box::before {
+            content: "🌸 ";
+            font-style: normal;
+        }
+
+        /* ===== BANNER ===== */
+        .banner {
+            background: linear-gradient(145deg, #ffd9e6, #ffb3c6);
+            border-radius: var(--radius);
+            padding: 24px 20px;
+            text-align: center;
+            color: #5a3a47;
+            margin-bottom: 18px;
+            box-shadow: 0 6px 14px rgba(255, 143, 171, 0.35);
+        }
+
+        .banner h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .banner p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 14px;
+        }
+
+        .btn {
+            background: var(--white);
+            border: none;
+            padding: 12px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            color: var(--pink-deep);
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(224, 122, 158, 0.25);
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1.5px solid #ffe4ec;
+        }
+
+        .btn:hover {
+            background: #fff5f9;
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: var(--pink-strong);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(255, 143, 171, 0.5);
+        }
+
+        .btn-primary:hover {
+            background: var(--pink-deep);
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+
+        .btn-block {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--pink-strong);
+            color: var(--pink-deep);
+            box-shadow: none;
+        }
+
+        /* ===== PRODUK GRID ===== */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 14px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: 0.2s;
+            border: 1px solid #ffeef4;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(255, 143, 171, 0.3);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 120px;
+            background: #ffeef4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            cursor: pointer;
+            transition: 0.2s;
+            position: relative;
+        }
+
+        .product-img:hover {
+            background: #ffe0eb;
+        }
+
+        .product-img .service-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: var(--pink-strong);
+            color: white;
+            font-size: 9px;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+
+        .product-info {
+            padding: 12px 12px 14px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-name {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+
+        .product-price {
+            font-weight: 800;
+            color: var(--pink-deep);
+            font-size: 15px;
+        }
+
+        .product-unit {
+            font-size: 11px;
+            color: var(--text-soft);
+            margin-bottom: 10px;
+        }
+
+        .qty-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 6px 0 10px;
+        }
+
+        .qty-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1.5px solid var(--pink-medium);
+            background: var(--white);
+            color: var(--pink-deep);
+            font-weight: 800;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.15s;
+        }
+
+        .qty-btn:hover {
+            background: var(--pink-bg);
+        }
+
+        .qty-value {
+            font-weight: 700;
+            font-size: 15px;
+            min-width: 28px;
+            text-align: center;
+        }
+
+        .product-card .btn {
+            margin-top: auto;
+            font-size: 12px;
+            padding: 8px 10px;
+        }
+
+        /* ===== KERANJANG ===== */
+        .cart-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #ffeef4;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-img {
+            width: 56px;
+            height: 56px;
+            background: #ffeef4;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .cart-item-detail {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .cart-item-price {
+            font-size: 13px;
+            color: var(--pink-deep);
+            font-weight: 700;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 800;
+            font-size: 18px;
+            padding: 16px 0 8px;
+            border-top: 2px dashed #ffd9e6;
+            margin-top: 10px;
+            color: var(--pink-deep);
+        }
+
+        /* ===== PESANAN ===== */
+        .order-card {
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            margin-bottom: 14px;
+            box-shadow: var(--shadow);
+            border-left: 6px solid var(--pink-medium);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .order-id {
+            font-weight: 800;
+            color: var(--pink-deep);
+            font-size: 15px;
+        }
+
+        .order-status {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 30px;
+            background: #ffeef4;
+            color: var(--pink-deep);
+        }
+
+        .order-status.selesai {
+            background: #d4f7d4;
+            color: #2e7d32;
+        }
+
+        .order-status.proses {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .order-status.menunggu {
+            background: #ffe0e0;
+            color: #c62828;
+        }
+
+        .order-detail {
+            font-size: 13px;
+            color: var(--text-soft);
+            margin: 4px 0;
+        }
+
+        .order-total {
+            font-weight: 800;
+            color: var(--pink-deep);
+            font-size: 16px;
+            margin-top: 8px;
+        }
+
+        .queue-badge {
+            background: var(--pink-bg);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 13px;
+            display: inline-block;
+            margin-top: 6px;
+        }
+
+        /* ===== FORM ===== */
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 14px;
+            border: 1.5px solid #ffe4ec;
+            background: #fffafc;
+            font-size: 14px;
+            transition: 0.2s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--pink-strong);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 143, 171, 0.15);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        /* ===== PROFILE ===== */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .avatar {
+            width: 64px;
+            height: 64px;
+            background: var(--pink-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        /* ===== LOGIN ===== */
+        .login-box {
+            max-width: 360px;
+            margin: 40px auto;
+        }
+
+        /* ===== ADMIN ===== */
+        .admin-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .admin-tab {
+            padding: 8px 18px;
+            border-radius: 30px;
+            border: 1.5px solid #ffe4ec;
+            background: white;
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--text-soft);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .admin-tab.active {
+            background: var(--pink-strong);
+            color: white;
+            border-color: var(--pink-strong);
+        }
+
+        /* ===== UTILITY ===== */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-2 {
+            margin-top: 12px;
+        }
+
+        .mt-3 {
+            margin-top: 18px;
+        }
+
+        .mb-2 {
+            margin-bottom: 12px;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .gap-2 {
+            gap: 12px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-soft);
+        }
+
+        .empty-state .icon {
+            font-size: 56px;
+            margin-bottom: 12px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 700px) {
+            .bottom-nav {
+                position: fixed;
+                top: 0;
+                bottom: auto;
+                border-radius: 0 0 24px 24px;
+                padding: 10px 0 14px;
+            }
+
+            .app-container {
+                padding-top: 80px;
+                max-width: 900px;
+            }
+
+            body {
+                padding-bottom: 20px;
+            }
+
+            .nav-item {
+                flex-direction: row;
+                gap: 6px;
+                font-size: 14px;
+                padding: 8px 22px;
+            }
+
+            .nav-item .icon {
+                font-size: 20px;
+            }
+
+            .badge {
+                top: 2px;
+                right: 2px;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 400px) {
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .product-img {
+                height: 100px;
+                font-size: 38px;
+            }
+
+            .product-name {
+                font-size: 13px;
+            }
+        }
+
+        /* ===== NOTIFIKASI TOAST ===== */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: var(--pink-deep);
+            color: white;
+            padding: 14px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 8px 24px rgba(224, 122, 158, 0.5);
+            z-index: 2000;
+            transition: transform 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            max-width: 90%;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.success {
+            background: #4caf50;
+        }
+
+        .toast.warning {
+            background: #ff9800;
+        }
+
+        .toast.info {
+            background: var(--pink-strong);
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #ffeef4;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--pink-medium);
+            border-radius: 10px;
+        }
+
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(74, 59, 63, 0.4);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1500;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius);
+            padding: 24px 20px;
+            max-width: 440px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(224, 122, 158, 0.3);
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-content h2 {
+            color: var(--pink-deep);
+            margin-bottom: 14px;
+            font-size: 20px;
+        }
+
+        /* ===== FILE INPUT ===== */
+        .file-input-wrapper {
+            border: 2px dashed var(--pink-medium);
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+            background: #fffafc;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-bottom: 10px;
+        }
+
+        .file-input-wrapper:hover {
+            background: #ffeef4;
+        }
+
+        .file-input-wrapper input {
+            display: none;
+        }
+
+        .file-input-wrapper .icon {
+            font-size: 32px;
+            margin-bottom: 6px;
+        }
+
+        .file-input-wrapper p {
+            font-size: 13px;
+            color: var(--text-soft);
+        }
+
+        .file-name {
+            font-size: 12px;
+            color: var(--pink-deep);
+            font-weight: 700;
+            margin-top: 6px;
+        }
+
+        /* ===== PAYMENT OPTIONS ===== */
+        .payment-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .payment-option {
+            border: 1.5px solid #ffe4ec;
+            border-radius: 14px;
+            padding: 12px 10px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            background: #fffafc;
+        }
+
+        .payment-option.selected {
+            border-color: var(--pink-strong);
+            background: var(--pink-bg);
+            box-shadow: 0 0 0 3px rgba(255, 143, 171, 0.2);
+        }
+
+        .payment-option .icon {
+            font-size: 22px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* ===== STEP INDICATOR ===== */
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin: 16px 0;
+            position: relative;
+        }
+
+        .step-indicator::before {
+            content: '';
+            position: absolute;
+            top: 14px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: #ffe4ec;
+            z-index: 0;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .step-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ffe4ec;
+            color: var(--text-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .step.active .step-circle {
+            background: var(--pink-strong);
+            color: white;
+            box-shadow: 0 0 0 4px rgba(255, 143, 171, 0.3);
+        }
+
+        .step.done .step-circle {
+            background: #4caf50;
+            color: white;
+        }
+
+        .step-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-soft);
+            text-align: center;
+        }
+
+        .step.active .step-label {
+            color: var(--pink-deep);
+        }
+
+        /* ===== INFO LIST ===== */
+        .info-list {
+            list-style: none;
+            font-size: 13px;
+            line-height: 2;
+        }
+
+        .info-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOAST NOTIFIKASI -->
+    <div id="toast" class="toast"></div>
+
+    <!-- KONTAINER UTAMA -->
+    <div class="app-container" id="app"></div>
+
+    <!-- NAVIGASI BAWAH -->
+    <nav class="bottom-nav" id="bottomNav">
+        <button class="nav-item active" data-page="beranda" onclick="navigate('beranda')">
+            <span class="icon">🏠</span>
+            <span>Beranda</span>
+        </button>
+        <button class="nav-item" data-page="jualan" onclick="navigate('jualan')">
+            <span class="icon">🛍️</span>
+            <span>Jualan</span>
+        </button>
+        <button class="nav-item" data-page="keranjang" onclick="navigate('keranjang')">
+            <span class="icon">🛒</span>
+            <span>Keranjang</span>
+            <span class="badge" id="cartBadge">0</span>
+        </button>
+        <button class="nav-item" data-page="pesanan" onclick="navigate('pesanan')">
+            <span class="icon">📦</span>
+            <span>Pesanan</span>
+            <span class="badge hidden" id="orderBadge">0</span>
+        </button>
+        <button class="nav-item" data-page="profil" onclick="navigate('profil')">
+            <span class="icon">👤</span>
+            <span>Profil</span>
+        </button>
+    </nav>
+
+    <script>
+        // ============================================================
+        //  DATA & STATE
+        // ============================================================
+
+        const PRODUCTS = [
+            {
+                id: 'bolpoin',
+                name: 'Bolpoin',
+                price: 3000,
+                unit: 'biji',
+                icon: '🖊️',
+                desc: 'Bolpoin tinta hitam yang nyaman digunakan untuk menulis catatan. Harga berlaku kelipatan per biji.',
+                isService: false
+            },
+            {
+                id: 'margin',
+                name: 'Margin Biologi',
+                price: 13000,
+                unit: 'biji',
+                icon: '📒',
+                desc: 'Margin biologi dengan kertas tebal dan garis rapi. Cocok untuk praktikum dan catatan biologi.',
+                isService: false
+            },
+            {
+                id: 'kertas',
+                name: 'Kertas Fisika',
+                price: 3000,
+                unit: '10 lembar',
+                icon: '📄',
+                desc: 'Kertas fisika bergaris khusus untuk praktikum dan laporan. Dijual per 10 lembar.',
+                isService: false
+            },
+            {
+                id: 'daftarpustaka',
+                name: 'Jasa Daftar Pustaka',
+                price: 7000,
+                unit: '10 daftar pustaka',
+                icon: '📚',
+                desc: 'Jasa pembuatan daftar pustaka otomatis. Upload file tugasmu, kami buatkan daftar pustakanya. Dihitung per 10 daftar pustaka.',
+                isService: true
+            }
+        ];
+
+        // State aplikasi
+        let state = {
+            page: 'beranda',
+            cart: [],
+            orders: [],
+            user: null,
+            admin: null,
+            adminMode: false,
+            adminTab: 'baru',
+            selectedProduct: null,
+            detailQty: 1,
+            checkoutData: null,
+            paymentMethod: null,
+            uploadedFile: null,
+            adminFileResult: null,
+            adminSelectedOrder: null
+        };
+
+        // ============================================================
+        //  LOCAL STORAGE
+        // ============================================================
+
+        function loadState() {
+            try {
+                const saved = localStorage.getItem('pinkpastel_state');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    state.cart = parsed.cart || [];
+                    state.orders = parsed.orders || [];
+                    state.user = parsed.user || null;
+                }
+            } catch (e) {
+                console.warn('Gagal memuat state', e);
+            }
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem('pinkpastel_state', JSON.stringify({
+                    cart: state.cart,
+                    orders: state.orders,
+                    user: state.user
+                }));
+            } catch (e) {
+                console.warn('Gagal menyimpan state', e);
+            }
+        }
+
+        // ============================================================
+        //  UTILITY
+        // ============================================================
+
+        function formatRupiah(angka) {
+            return 'Rp' + angka.toLocaleString('id-ID');
+        }
+
+        function showToast(msg, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.className = 'toast ' + type;
+            toast.classList.add('show');
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2800);
+        }
+
+        function getProduct(id) {
+            return PRODUCTS.find(p => p.id === id);
+        }
+
+        function getCartItem(id) {
+            return state.cart.find(c => c.id === id);
+        }
+
+        function getCartTotal() {
+            return state.cart.reduce((sum, item) => {
+                return sum + (item.price * item.qty);
+            }, 0);
+        }
+
+        function getCartCount() {
+            return state.cart.reduce((sum, item) => sum + item.qty, 0);
+        }
+
+        function generateOrderId() {
+            const now = new Date();
+            return 'INV-' + now.getFullYear() +
+                String(now.getMonth() + 1).padStart(2, '0') +
+                String(now.getDate()).padStart(2, '0') + '-' +
+                String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+        }
+
+        function getQueueNumber() {
+            const today = new Date().toDateString();
+            const todayOrders = state.orders.filter(o => new Date(o.createdAt).toDateString() === today);
+            return todayOrders.length + 1;
+        }
+
+        function isH1(dateStr) {
+            if (!dateStr) return false;
+            const selected = new Date(dateStr);
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            return selected >= tomorrow;
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ============================================================
+        //  NAVIGASI
+        // ============================================================
+
+        function navigate(page) {
+            state.page = page;
+            state.selectedProduct = null;
+            state.adminMode = false;
+            render();
+            updateNav();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateNav() {
+            document.querySelectorAll('.nav-item').forEach(el => {
+                el.classList.toggle('active', el.dataset.page === state.page);
+            });
+            // Badge keranjang
+            const cartBadge = document.getElementById('cartBadge');
+            const count = getCartCount();
+            cartBadge.textContent = count;
+            cartBadge.classList.toggle('hidden', count === 0);
+
+            // Badge pesanan (jika ada yang diproses)
+            const orderBadge = document.getElementById('orderBadge');
+            const activeOrders = state.orders.filter(o =>
+                o.status !== 'Selesai' && o.user === (state.user?.email || 'guest')
+            );
+            orderBadge.textContent = activeOrders.length;
+            orderBadge.classList.toggle('hidden', activeOrders.length === 0);
+        }
+
+        // ============================================================
+        //  RENDER UTAMA
+        // ============================================================
+
+        function render() {
+            const app = document.getElementById('app');
+            if (state.adminMode) {
+                app.innerHTML = renderAdmin();
+            } else {
+                switch (state.page) {
+                    case 'beranda':
+                        app.innerHTML = renderBeranda();
+                        break;
+                    case 'jualan':
+                        app.innerHTML = renderJualan();
+                        break;
+                    case 'detail':
+                        app.innerHTML = renderDetail();
+                        break;
+                    case 'keranjang':
+                        app.innerHTML = renderKeranjang();
+                        break;
+                    case 'checkout':
+                        app.innerHTML = renderCheckout();
+                        break;
+                    case 'pesanan':
+                        app.innerHTML = renderPesanan();
+                        break;
+                    case 'profil':
+                        app.innerHTML = renderProfil();
+                        break;
+                    case 'login':
+                        app.innerHTML = renderLogin();
+                        break;
+                    default:
+                        app.innerHTML = renderBeranda();
+                }
+            }
+            updateNav();
+        }
+
+        // ============================================================
+        //  HALAMAN BERANDA
+        // ============================================================
+
+        function renderBeranda() {
+            return `
+                <div class="app-header">
+                    <h1><span>🌸</span> PinkPastel Shop</h1>
+                    <div class="header-actions">
+                        <button onclick="navigate('keranjang')" title="Keranjang">🛒</button>
+                    </div>
+                </div>
+
+                <div class="banner">
+                    <h2>Selamat Datang di Toko Kita 💗</h2>
+                    <p>Alat tulis lengkap & jasa daftar pustaka praktis</p>
+                    <button class="btn btn-primary" onclick="navigate('jualan')">
+                        🛍️ Lihat Jualan
+                    </button>
+                </div>
+
+                <div class="quote-box">
+                    "Sedikit demi sedikit, tugas selesai satu per satu."
+                </div>
+
+                <div class="quote-box">
+                    "Belajar hari ini, sukses esok hari. Semangat! ✨"
+                </div>
+
+                <div class="card">
+                    <div class="card-title">✨ Yang Kami Jual</div>
+                    <ul class="info-list">
+                        <li>🖊️ <strong>Bolpoin</strong> — Rp3.000 / biji</li>
+                        <li>📒 <strong>Margin Biologi</strong> — Rp13.000 / biji</li>
+                        <li>📄 <strong>Kertas Fis
